@@ -1,0 +1,34 @@
+/* LoginPage.css */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;  /* Full viewport height */
+    background-color: #FFA500;  /* Orange background color */
+    padding: 20px;  /* Padding */
+    box-sizing: border-box;
+  }
+  
+  .login-title {
+    margin-bottom: 20px;  /* Spacing below title */
+  }
+  
+  .login-input,
+  .login-select,
+  .login-button {
+    margin-bottom: 10px;  /* Spacing between elements */
+    padding: 10px;  /* Padding */
+    border-radius: 4px;  /* Rounded corners */
+    border: 1px solid #ccc;  /* Border styling */
+    width: 100%;  /* Full width */
+    max-width: 300px;  /* Maximum width constraint */
+  }
+  
+  .login-button {
+    background-color: #007BFF;  /* Blue background */
+    color: white;  /* White text color */
+    cursor: pointer;  /* Pointer cursor on hover */
+    border: none;  /* Remove default border */
+    text-align: center;  /* Center text */
+  }
