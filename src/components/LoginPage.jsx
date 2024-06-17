@@ -1,40 +1,87 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './LoginPage.css';  // Import the CSS file
+import { redirect, useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
-  const [username, setUsername] = useState('');
-  const [role, setRole] = useState('employee');
-  const navigate = useNavigate();
+  const navigate = useNavigate()
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
 
-  const handleLogin = () => {
-    const user = { id: Date.now(), name: username, role };
-    localStorage.setItem('currentUser', JSON.stringify(user));
-    navigate(`/${role}`);  // Use template literal to concatenate role into the path
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+  
+  const handleLogin = async (e) => {
+    e.preventDefault(); // Prevent default form submission
+
+    try {
+      const response = await axios.post('http://localhost:3001/api/login', {
+        email: formData.email,
+        password: formData.password
+      });
+
+      const { email, role } = response.data[0];
+      localStorage.setItem('token',  email);
+      localStorage.setItem('role', role);
+        //  console.log(response.data)
+       // Redirect based on role after successful login
+      // Example redirect to '/manager' if role is 'manager'
+      // Replace '/manager' with appropriate route based on your application
+      // For now, just alert the role
+      // alert(role);
+      switch(role){
+        case 'manager':
+          navigate("/manager");
+          navigate(0)
+          break;
+        case 'admin':
+          navigate('/admin')
+          navigate(0)
+        break;
+        case 'employee':
+        navigate('/employee')
+        navigate(0)
+        
+        default:
+          navigate("/");
+      }
+    } catch (error) {
+      // console.error('Login error:', error);
+      // Handle login error, such as displaying an error message
+    }
   };
 
   return (
     <div className="login-container">
-      <h1 className="login-title">Login</h1>
-      <input
-        type="text"
-        placeholder="Enter your name"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        className="login-input"
-      />
-      <select
-        value={role}
-        onChange={(e) => setRole(e.target.value)}
-        className="login-select"
-      >
-        <option value="admin">Admin</option>
-        <option value="manager">Manager</option>
-        <option value="employee">Employee</option>
-      </select>
-      <button onClick={handleLogin} className="login-button">
-        Submit
-      </button>
+      {/* <h1 className="login-title">Login</h1> */}
+      <p className="intro-message">Welcome to Elewa Interview assignment project</p>
+        <form onSubmit={handleLogin} className="login-form">
+        <input
+          type="text"
+          name="email"
+          placeholder="Enter your email address"
+          value={formData.email}
+          onChange={handleInputChange}
+          className="login-input"
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Enter your password"
+          value={formData.password}
+          onChange={handleInputChange}
+          className="login-input"
+        />
+        <button type="submit" className="login-button">
+          Login
+        </button>
+      </form>
     </div>
   );
 };

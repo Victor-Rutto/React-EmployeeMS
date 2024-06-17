@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import EmployeeForm from './EmployeeForm';
 import TodoList from './TodoList';
 import './TodoList.css';
+import axios from 'axios';
 
 const ManagerDashboard = ({ currentUser }) => {
   const [tasks, setTasks] = useState([]);
@@ -24,18 +25,24 @@ const ManagerDashboard = ({ currentUser }) => {
   const loadTasks = () => {
     // Mock tasks data
     const storedTasks = [
-      { id: '1', name: 'Task 1', dueDate: '2024-06-20', assignee: '1' },
-      { id: '2', name: 'Task 2', dueDate: '2024-06-22', assignee: '2' },
+      { id: '1', name: 'Task 1', dueDate: '2024-06-20', assignee: '1', status: '' },
+      { id: '2', name: 'Task 2', dueDate: '2024-06-22', assignee: '2', status: ''  },
     ];
     setTasks(storedTasks);
+    localStorage.setItem('tasks', JSON.stringify(storedTasks))
   };
 
   const handleAddTask = (newTask) => {
     setTasks([...tasks, newTask]);
+    localStorage.setItem('tasks', JSON.stringify(tasks))
   };
 
-  const handleAddEmployee = (newEmployee) => {
+  const handleAddEmployee = async (newEmployee) => {
     setEmployees([...employees, newEmployee]);
+    const response = await axios.post('http://localhost:3001/api/users',{...newEmployee})
+    if(response){
+      alert('New employee added successfully')
+    }
   };
 
   const handleDeleteTask = (index) => {

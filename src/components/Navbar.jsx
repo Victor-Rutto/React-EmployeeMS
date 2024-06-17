@@ -6,7 +6,8 @@ const Navbar = ({ currentUser, setCurrentUser }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem('currentUser');
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
     setCurrentUser(null);
     navigate('/');
   };

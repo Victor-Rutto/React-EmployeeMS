@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const EmployeeForm = ({ onAddEmployee }) => {
-  const [employee, setEmployee] = useState({ name: '', email: '', role: '', department: '' });
+  const [employee, setEmployee] = useState({ name: '', email: '', role: '', department: '', password: '' });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -10,9 +10,9 @@ const EmployeeForm = ({ onAddEmployee }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (employee.name && employee.email && employee.role && employee.department) {
+    if (employee.name && employee.email && employee.role && employee.department && employee.password) {
       onAddEmployee({ ...employee, id: Date.now().toString() });
-      setEmployee({ name: '', email: '', role: '', department: '' });
+      setEmployee({ name: '', email: '', role: '', department: '', password: '' });
     }
   };
 
@@ -45,6 +45,13 @@ const EmployeeForm = ({ onAddEmployee }) => {
         value={employee.department}
         onChange={handleChange}
         placeholder="Department"
+      />
+       <input
+        type="text"
+        name="password"
+        value={employee.password}
+        onChange={handleChange}
+        placeholder="Password"
       />
       <button type="submit">Add Employee</button>
     </form>

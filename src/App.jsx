@@ -9,6 +9,7 @@ function App() {
 
   useEffect(() => {
     const user = checkUserSession();
+    console.log(user)
     if (user) {
       setCurrentUser(user);
     }
