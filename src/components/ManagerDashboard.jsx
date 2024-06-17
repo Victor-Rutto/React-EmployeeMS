@@ -39,10 +39,17 @@ const ManagerDashboard = ({ currentUser }) => {
 
   const handleAddEmployee = async (newEmployee) => {
     setEmployees([...employees, newEmployee]);
-    const response = await axios.post('http://localhost:3001/api/users',{...newEmployee})
-    if(response){
-      alert('New employee added successfully')
+    // const response = await axios.post('http://localhost:3001/api/users',{...newEmployee})
+    const user = localStorage.getItem('user')
+    if(user){
+      console.log('User ', user)
+      JSON.parse(user)    
+     localStorage.setItem('user', JSON.stringify([...JSON.parse(user) , newEmployee]))
     }
+    else{
+      localStorage.setItem('user', JSON.stringify([newEmployee])  ) 
+    }
+      alert('New employee added successfully')
   };
 
   const handleDeleteTask = (index) => {

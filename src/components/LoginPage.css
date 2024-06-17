@@ -1,34 +1,65 @@
 /* LoginPage.css */
+
 .login-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;  /* Full viewport height */
-    background-color: #FFA500;  /* Orange background color */
-    padding: 20px;  /* Padding */
-    box-sizing: border-box;
-  }
-  
-  .login-title {
-    margin-bottom: 20px;  /* Spacing below title */
-  }
-  
-  .login-input,
-  .login-select,
-  .login-button {
-    margin-bottom: 10px;  /* Spacing between elements */
-    padding: 10px;  /* Padding */
-    border-radius: 4px;  /* Rounded corners */
-    border: 1px solid #ccc;  /* Border styling */
-    width: 100%;  /* Full width */
-    max-width: 300px;  /* Maximum width constraint */
-  }
-  
-  .login-button {
-    background-color: #007BFF;  /* Blue background */
-    color: white;  /* White text color */
-    cursor: pointer;  /* Pointer cursor on hover */
-    border: none;  /* Remove default border */
-    text-align: center;  /* Center text */
-  }
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.intro-message {
+  font-size: 18px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.button {
+  width: 100%;
+  padding: 12px;
+  background-color: #91ff00;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+.switch-form-text {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.switch-form-link {
+  background: none;
+  border: none;
+  color: #0011ff;
+  cursor: pointer;
+  font-size: 16px;
+  text-decoration: underline;
+}
+
+.form-error {
+  color: #dc3545;
+  font-size: 14px;
+  margin-top: 5px;
+}
