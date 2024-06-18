@@ -1,20 +1,49 @@
+/* TodoList.css */
+
+.edit-employee-button,
+.delete-employee-button,
+.delete-todo-button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.edit-employee-button {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 50px;
+  padding: 5px;
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
+
+.delete-employee-button,
+.delete-todo-button {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 50px;
+  padding: 5px;
+  background-color: #f44336; /* Red */
+  color: white;
+}
+
 .todo-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
 }
 
 .todo-item {
-  border: 1px solid #ccc;
-  padding: 16px;
-  border-radius: 8px;
+  background-color: #f9f9f9;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 200px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.delete-todo-button {
-  background-color: red;
-  color: white;
-  border: none;
-  padding: 8px;
-  cursor: pointer;
-  border-radius: 4px;
+.todo-item div {
+  margin-bottom: 10px;
 }

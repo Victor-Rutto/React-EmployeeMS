@@ -3,13 +3,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css'; // Import CSS file
 
 const Navbar = ({ currentUser, setCurrentUser }) => {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Hook from react-router-dom for navigation
 
+   // Function to handle logout
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('role');
-    setCurrentUser(null);
-    navigate('/');
+    localStorage.removeItem('token'); // Remove token from localStorage
+    localStorage.removeItem('role');  // Remove role from localStorage
+    setCurrentUser(null);             // Set currentUser state to null (indicating logout)
+    navigate('/');                    // Navigate to the root route after logout
   };
 
   return (

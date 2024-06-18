@@ -3,16 +3,19 @@ import React, { useState, useEffect } from 'react';
 const EmployeeDashboard = ({ currentUser }) => {
   const [tasks, setTasks] = useState([]);
 
+  // Load tasks
   useEffect(() => {
     loadTasks();
   }, []);
 
+  // Function to load tasks from local storage
   const loadTasks = () => {
     const storedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
     setTasks(storedTasks);
     // Load tasks assigned to the employee from local storage or API
   };
 
+  // Function to mark a task as 'In Progress'
   const markTaskInProgress = (taskId) => {
     const updatedTasks = tasks.map(task => 
       task.id === taskId ? { ...task, status: 'In Progress' } : task
@@ -21,6 +24,7 @@ const EmployeeDashboard = ({ currentUser }) => {
     localStorage.setItem('tasks', JSON.stringify(updatedTasks));
   };
 
+  // Function to mark a task as 'Completed'
   const markTaskCompleted = (taskId) => {
     const updatedTasks = tasks.map(task => 
       task.id === taskId ? { ...task, status: 'Completed' } : task
@@ -51,6 +55,7 @@ const EmployeeDashboard = ({ currentUser }) => {
   );
 };
 
+// Inline styles for the component
 const styles = {
   container: {
     padding: '20px',

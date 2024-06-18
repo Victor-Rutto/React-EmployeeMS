@@ -1,0 +1,36 @@
+/* EmployeeForm.css */
+/* Styling for the Employee Addition form */
+
+.employee-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .employee-form input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .employee-form button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .employee-form button:hover {
+    background-color: #45a049;
+  }
+  

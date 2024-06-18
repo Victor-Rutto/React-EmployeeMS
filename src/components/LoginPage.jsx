@@ -6,11 +6,13 @@ import { useNavigate } from 'react-router-dom';
 const LoginPage = () => {
   const navigate = useNavigate();
 
+  // State for managing login form data
   const [loginFormData, setLoginFormData] = useState({
     email: '',
     password: ''
   });
 
+  // State for managing signup form data
   const [signupFormData, setSignupFormData] = useState({
     name: '',
     email: '',
@@ -18,11 +20,16 @@ const LoginPage = () => {
     password: ''
   });
 
+  // State for handling login form errors
   const [loginFormError, setLoginFormError] = useState('');
+  
+  // State for handling signup form errors
   const [signupFormError, setSignupFormError] = useState('');
 
+  // State to toggle between login and signup forms
   const [showSignup, setShowSignup] = useState(false);
 
+  // Handle input changes for login form
   const handleLoginInputChange = (e) => {
     setLoginFormData({
       ...loginFormData,
@@ -30,6 +37,7 @@ const LoginPage = () => {
     });
   };
 
+  // Handle input changes for signup form
   const handleSignupInputChange = (e) => {
     setSignupFormData({
       ...signupFormData,
@@ -37,6 +45,7 @@ const LoginPage = () => {
     });
   };
 
+  // Handle login form submission
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -46,44 +55,35 @@ const LoginPage = () => {
       return;
     }
 
-    let role = ''
+    let role = '';
 
     try {
-      // const response = await axios.post('http://localhost:3001/api/login', {
-      //   email: loginFormData.email,
-      //   password: loginFormData.password
-      // });
-      const user = JSON.parse(localStorage.getItem('user') )
-     user.forEach((currentUser)=>{
-      console.log(currentUser)
-        if(currentUser.email == loginFormData.email)
-    {
-      localStorage.setItem('token', currentUser.email);
-      localStorage.setItem('role', currentUser.role);
-      role = currentUser.role
-    }
-
-      })
-    
-
+      const user = JSON.parse(localStorage.getItem('user'));
+      user.forEach((currentUser) => {
+        if (currentUser.email === loginFormData.email) {
+          localStorage.setItem('token', currentUser.email);
+          localStorage.setItem('role', currentUser.role);
+          role = currentUser.role;
+        }
+      });
 
       // Navigate to respective dashboard based on role
       switch (role) {
         case 'manager':
           navigate("/manager");
-          navigate(0)
+          navigate(0);
           break;
         case 'admin':
           navigate('/admin');
-          navigate(0)
+          navigate(0);
           break;
         case 'employee':
           navigate('/employee');
-          navigate(0)
+          navigate(0);
           break;
         default:
           navigate("/");
-          navigate(0)
+          navigate(0);
       }
     } catch (error) {
       console.error('Login error:', error);
@@ -91,6 +91,7 @@ const LoginPage = () => {
     }
   };
 
+  // Handle signup form submission
   const handleSignup = async (e) => {
     e.preventDefault();
 
@@ -101,38 +102,20 @@ const LoginPage = () => {
     }
 
     try {
-      // Simulate signup API call
-      // Replace with actual API endpoint and logic
-      // const response = await axios.post('http://localhost:3001/api/signup', {
-      //   name: signupFormData.name,
-      //   email: signupFormData.email,
-      //   role: signupFormData.role,
-      //   password: signupFormData.password
-      // });
+      const user = JSON.parse(localStorage.getItem('user')) || [];
+      localStorage.setItem('user', JSON.stringify([...user, signupFormData]));
 
-      const user = localStorage.getItem('user')
-      if(user){
-        JSON.parse(user)    
-       localStorage.setItem('user', JSON.stringify([...user, signupFormData]))
-      }
-      else{
-        localStorage.setItem('user', JSON.stringify([signupFormData])  ) 
-      }
-       localStorage.setItem('token', signupFormData.email);
-       localStorage.setItem('role', signupFormData.role)
-      // For demonstration purposes, log the data instead of making a real API call
-      console.log('Signup form data:', signupFormData);
+      localStorage.setItem('token', signupFormData.email);
+      localStorage.setItem('role', signupFormData.role);
 
       // Clear form fields after submission
       setSignupFormData({
         name: '',
         email: '',
         role: '',
-        departmet: '',
         password: ''
       });
 
-      // Optionally, you could also clear login form fields here if needed
       setLoginFormData({
         email: '',
         password: ''
@@ -143,13 +126,14 @@ const LoginPage = () => {
 
       // Automatically switch to login form after successful signup
       setShowSignup(false);
-      // navigate(`/${signupFormData.role}`)
+      
     } catch (error) {
       console.error('Signup error:', error);
       // Handle signup error, such as displaying an error message
     }
   };
 
+  // Toggle between login and signup forms
   const toggleForm = () => {
     setShowSignup(!showSignup);
   };
@@ -157,6 +141,7 @@ const LoginPage = () => {
   return (
     <div className="login-container">
       <p className="intro-message">Welcome to Elewa Interview assignment project</p>
+      <p className="intro-message">First signup as manager/admin/employee as your role to access the system</p>
 
       {/* Conditional Rendering based on showSignup state */}
       {!showSignup && (
@@ -222,7 +207,7 @@ const LoginPage = () => {
             className="input-field"
           />
           {signupFormError && <p className="form-error">{signupFormError}</p>}
-          <button type="submit" className="button" onClick={(e)=> submitForm(e)}> 
+          <button type="submit" className="button">
             Sign up
           </button>
           <p className="switch-form-text">

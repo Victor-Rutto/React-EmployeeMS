@@ -10,12 +10,14 @@ const AdminDashboard = ({ currentUser }) => {
     loadManagers();
   }, []);
 
+  // Function to load managers from local storage
   const loadManagers = () => {
     const storedManagers = JSON.parse(localStorage.getItem('managers')) || [];
     setManagers(storedManagers);
     setError(null); // Reset error state
   };
 
+  // Function to handle the addition of a new manager
   const handleAddManager = (e) => {
     e.preventDefault();
     const newManager = {
@@ -30,8 +32,8 @@ const AdminDashboard = ({ currentUser }) => {
       const updatedManagers = [...managers, newManager];
       setManagers(updatedManagers);
       localStorage.setItem('managers', JSON.stringify(updatedManagers));
-      setManagerName('');
-      setManagerEmail('');
+      setManagerName(''); // Reset input fields
+      setManagerEmail(''); // Reset input fields
       setError(null); // Reset error state
     } catch (error) {
       console.error('Error adding manager:', error);
@@ -73,25 +75,6 @@ const AdminDashboard = ({ currentUser }) => {
           ))}
         </ul>
       </div>
-      
-      {/* Uncomment when tasks and departments are handled in the backend */}
-      {/* <div>
-        <h2>Departments</h2>
-        <ul>
-          {departments.map(department => (
-            <li key={department.id}>{department.name}</li>
-          ))}
-        </ul>
-      </div>
-      
-      <div>
-        <h2>Tasks</h2>
-        <ul>
-          {tasks.map(task => (
-            <li key={task.id}>{task.title}</li>
-          ))}
-        </ul>
-      </div> */}
     </div>
   );
 };
